@@ -1,9 +1,14 @@
 package it.ibs.registro.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,9 +23,10 @@ public class Company {
 	  
 	  public Company() {}
 
-	public Company(Long id, String name) {		
+	public Company(Long id, String name, List<Course> courses) {	
 		this.id = id;
 		this.name = name;
+		this.courses = courses;
 	}
 
 	public Long getId() {
@@ -38,5 +44,19 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@OneToMany(mappedBy = "company", fetch = FetchType.LAZY,
+			   cascade = CascadeType.ALL)
+			   private List<Course> courses;
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+	
+	
 	
 }

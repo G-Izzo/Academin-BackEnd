@@ -1,22 +1,33 @@
 package it.ibs.registro.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "exam")
 public class Exam {
 	
-public Exam() {}	
+public Exam() {}
 
-public Exam(Long id, String name, String url) {	
-		Id = id;
-		this.name = name;
-		this.url = url;
-	}
+public Exam(Long id, String name, String url, List<Exam_Session> exam_session, List<Skill> skill) {
+	super();
+	Id = id;
+	this.name = name;
+	this.url = url;
+	this.exam_session = exam_session;
+	this.skill = skill;
+}
 
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,5 +58,32 @@ public void setUrl(String url) {
 	this.url = url;
 }
 
+@OneToMany(mappedBy = "exam_session", fetch = FetchType.LAZY,
+cascade = CascadeType.ALL)
+	private List<Exam_Session> exam_session;
+	
+	@ManyToMany
+	@JoinTable(
+	  name = "exam_skill", 
+	  joinColumns = @JoinColumn(name = "exam_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "skill_id"))
+	  private List<Skill> skill;
+	public List<Exam_Session> getExam_session() {
+		return exam_session;
+	}
+
+	public void setExam_session(List<Exam_Session> exam_session) {
+		this.exam_session = exam_session;
+	}
+
+	public List<Skill> getSkill() {
+		return skill;
+	}
+
+	public void setSkill(List<Skill> skill) {
+		this.skill = skill;
+	}
+
+	
 
 }
