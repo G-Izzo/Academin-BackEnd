@@ -2,6 +2,9 @@ package it.ibs.registro.model;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,7 +17,10 @@ public class Lesson_Student {
 	
 	public Lesson_Student() {}	
 	
-	public Lesson_Student(String join_time, String exit_time, String daily_grade, Lesson lesson, Student student) {	
+
+	public Lesson_Student(Long id, String join_time, String exit_time, String daily_grade, Lesson lesson,
+			Student student) {	
+		this.id = id;
 		this.join_time = join_time;
 		this.exit_time = exit_time;
 		this.daily_grade = daily_grade;
@@ -22,10 +28,23 @@ public class Lesson_Student {
 		this.student = student;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String join_time;
 	private String exit_time;
 	private String daily_grade;
 	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getJoin_time() {
 		return join_time;
 	}

@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,16 +24,22 @@ public class Student_Skill {
 	 @Column(name = "skill_id")
 	 Long courseId; 
 
-	public Student_Skill() {}	
-		
-	public Student_Skill(Long studentId, Long courseId, Rating myRating, Student student, Skill skill) {
+	public Student_Skill() {}			
+
+	
+	public Student_Skill(Long studentId, Long courseId, Long id, Rating myRating, Student student, Skill skill) {
 		super();
 		this.studentId = studentId;
 		this.courseId = courseId;
+		this.id = id;
 		this.myRating = myRating;
 		this.student = student;
 		this.skill = skill;
 	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@Enumerated(EnumType.STRING)	
     private Rating myRating;
@@ -41,8 +50,18 @@ public class Student_Skill {
 
 	public void setMyRating(Rating myRating) {
 		this.myRating = myRating;
-	}
+	}	
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="student_id", nullable = false)
