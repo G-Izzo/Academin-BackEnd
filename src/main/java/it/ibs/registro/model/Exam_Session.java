@@ -25,7 +25,7 @@ public class Exam_Session {
 	
 	private String exam_date;	
 
-	@OneToMany(mappedBy = "student_exam_session", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "exam_session_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Student_Exam_Session> student_exam_session;
 			
 	@JsonIgnore

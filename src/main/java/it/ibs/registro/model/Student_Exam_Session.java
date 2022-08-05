@@ -35,7 +35,6 @@ public class Student_Exam_Session {
 	public Student_Exam_Session() {}
 	public Student_Exam_Session(Long id, String exam_files_url, int grade, Student student_id,
 			Exam_Session exam_session_id) {
-		super();
 		this.id = id;
 		this.exam_files_url = exam_files_url;
 		this.grade = grade;
