@@ -1,8 +1,5 @@
 package it.ibs.registro.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,17 +28,16 @@ public class Exam_Session {
 			
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="id", nullable = false)
-	private Exam exam;
+	@JoinColumn(name="exam_id", nullable = false)
+	private Exam exams;
 			
 	public Exam_Session() {}		
-	public Exam_Session(Long id, String exam_date, Student_Exam_Session student_exam_session, Exam exam) {
-			this.id = id;
+	public Exam_Session(Long id, String exam_date, Student_Exam_Session student_exam_session, Exam exams) {
+		this.id = id;
 		this.exam_date = exam_date;
 		this.student_exam_session = student_exam_session;
-		this.exam = exam;
+		this.exams = exams;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -57,11 +52,12 @@ public class Exam_Session {
 	public void setExam_date(String exam_date) {
 		this.exam_date = exam_date;
 	}
-	public Exam getExam() {
-		return exam;
+	
+	public Exam getExams() {
+		return exams;
 	}
-	public void setExam(Exam exam) {
-		this.exam = exam;
+	public void setExams(Exam exams) {
+		this.exams = exams;
 	}
 	public Student_Exam_Session getStudent_exam_session() {
 		return student_exam_session;

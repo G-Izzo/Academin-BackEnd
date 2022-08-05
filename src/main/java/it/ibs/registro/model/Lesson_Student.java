@@ -8,12 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "lesson_student")
@@ -27,21 +23,21 @@ public class Lesson_Student {
 	private String exit_time;
 	private String daily_grade;
 	
-	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Student> student;
+	@OneToMany(mappedBy = "lesson_student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Lesson> lesson_id;
 	
-	@OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Lesson> lesson;
-	
+	@OneToMany(mappedBy = "lesson_student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Student> student_id;
+		
 	public Lesson_Student() {}		
-	public Lesson_Student(Long id, String join_time, String exit_time, String daily_grade, List<Student> student,
-			List<Lesson> lesson) {	
+		public Lesson_Student(Long id, String join_time, String exit_time, String daily_grade, List<Lesson> lesson_id,
+			List<Student> student_id) {
 		this.id = id;
 		this.join_time = join_time;
 		this.exit_time = exit_time;
 		this.daily_grade = daily_grade;
-		this.student = student;
-		this.lesson = lesson;
+		this.lesson_id = lesson_id;
+		this.student_id = student_id;
 	}
 
 
@@ -72,17 +68,17 @@ public class Lesson_Student {
 	public void setDaily_grade(String daily_grade) {
 		this.daily_grade = daily_grade;
 	}
-	public List<Student> getStudent() {
-		return student;
+	
+	public List<Lesson> getLesson_id() {
+		return lesson_id;
 	}
-	public void setStudent(List<Student> student) {
-		this.student = student;
+	public void setLesson_id(List<Lesson> lesson_id) {
+		this.lesson_id = lesson_id;
 	}
-	public List<Lesson> getLesson() {
-		return lesson;
+	public List<Student> getStudent_id() {
+		return student_id;
 	}
-	public void setLesson(List<Lesson> lesson) {
-		this.lesson = lesson;
+	public void setStudent_id(List<Student> student_id) {
+		this.student_id = student_id;
 	}
-
 }

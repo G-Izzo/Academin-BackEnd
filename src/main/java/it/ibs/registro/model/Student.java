@@ -1,8 +1,5 @@
 package it.ibs.registro.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,20 +28,20 @@ public class Student {
 	private String project_allocation_date;
 	private String project_allocation_notes;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="student_id", nullable = false)
-	private Student student;
+	@JoinColumn(name = "lesson_student_id", nullable = false)
+	@JsonIgnore
+	private Lesson_Student lesson_student;
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="student_skill_id", nullable = false)
 	private Student_Skill student_skill;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="lesson_student_id", nullable = false)
-	private Lesson_Student lesson_student;
+	@JoinColumn(name = "student_exam_session_id", nullable = false)
+	@JsonIgnore
+	private Student_Exam_Session student_exam_session;
 	
 	public Student() {}	
 	public Student(Long id, String name, String surname, String cv_url, String qualifications) {
@@ -55,13 +51,10 @@ public class Student {
 		this.cv_url = cv_url;
 		this.qualifications = qualifications;
 	}
-
-	
 	public Student(Long id, String name, String surname, String cv_url, String qualifications,
 			String training_starting_date, String training_ending_date, String project_allocation_date,
-			String project_allocation_notes, Student student, Student_Skill student_skill,
-			Lesson_Student lesson_student) {
-		super();
+			String project_allocation_notes, Lesson_Student lesson_student, Student_Skill student_skill,
+			Student_Exam_Session student_exam_session) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -71,10 +64,11 @@ public class Student {
 		this.training_ending_date = training_ending_date;
 		this.project_allocation_date = project_allocation_date;
 		this.project_allocation_notes = project_allocation_notes;
-		this.student = student;
-		this.student_skill = student_skill;
 		this.lesson_student = lesson_student;
+		this.student_skill = student_skill;
+		this.student_exam_session = student_exam_session;
 	}
+	
 	public String getTraining_starting_date() {
 		return training_starting_date;
 	}
@@ -135,11 +129,12 @@ public class Student {
 	public void setQualifications(String qualifications) {
 		this.qualifications = qualifications;
 	}
-	public Student getStudent() {
-		return student;
+	
+	public Student_Exam_Session getStudent_exam_session() {
+		return student_exam_session;
 	}
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setStudent_exam_session(Student_Exam_Session student_exam_session) {
+		this.student_exam_session = student_exam_session;
 	}
 	public Student_Skill getStudent_skill() {
 		return student_skill;

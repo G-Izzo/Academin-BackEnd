@@ -27,16 +27,17 @@ public class Course {
 	private String starting_date;
 	private String ending_date;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="company_id", nullable = false)
+	@JoinColumn(name = "company_id", nullable = false)
+	@JsonIgnore
 	private Company company;
 	
 	@OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Lesson> lessons;
 	
 	public Course() {}	
-	public Course(Long id, String name, String starting_date, String ending_date, Company company, List<Lesson> lessons) {	
+	public Course(Long id, String name, String starting_date, String ending_date, Company company,
+			List<Lesson> lessons) {
 		this.id = id;
 		this.name = name;
 		this.starting_date = starting_date;
@@ -79,7 +80,6 @@ public class Course {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-
 	public List<Lesson> getLessons() {
 		return lessons;
 	}
