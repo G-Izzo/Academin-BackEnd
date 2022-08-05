@@ -18,8 +18,8 @@ import it.ibs.registro.service.Exam_Service;
 @RequestMapping("/api/v1")
 public class Exam_Controller {
 	
-  @Autowired
-  private Exam_Service exam_service;
+	@Autowired
+	private Exam_Service exam_service;
   
 	@PostMapping("/addExam")
 	public void addExam(@RequestBody Exam exam) {

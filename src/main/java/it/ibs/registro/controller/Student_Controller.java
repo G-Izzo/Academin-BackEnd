@@ -18,27 +18,26 @@ import it.ibs.registro.service.Student_Service;
 @RequestMapping("/api/v1")
 public class Student_Controller {
 	
-		@Autowired
-		private Student_Service student_service;
-		
-		@PostMapping("/addStudent")
-		public void addStudent(@RequestBody Student student) {
-			student_service.addStudent(student);			
-		}
-		
-		@GetMapping("/getAllStudents")
-		public List<Student> getAllStudents() {	
-				return student_service.getAllStudents();
-		}
-
-		@PutMapping("/updateStudent")
-		public void updateStudent(@RequestBody Student student) {
-			student_service.updateStudent(student);			
-		}	
-			
-		@DeleteMapping("/deleteStudent/{id}")
-			public void deleteStudent(@PathVariable(name="id") long id) {
-				student_service.deleteStudent(id);			
-		}
+	@Autowired
+	private Student_Service student_service;
 	
+	@PostMapping("/addStudent")
+	public void addStudent(@RequestBody Student student) {
+		student_service.addStudent(student);			
+	}
+	
+	@GetMapping("/getAllStudents")
+	public List<Student> getAllStudents() {	
+			return student_service.getAllStudents();
+	}
+
+	@PutMapping("/updateStudent")
+	public void updateStudent(@RequestBody Student student) {
+		student_service.updateStudent(student);			
+	}	
+		
+	@DeleteMapping("/deleteStudent/{id}")
+		public void deleteStudent(@PathVariable(name="id") long id) {
+			student_service.deleteStudent(id);			
+	}	
 }

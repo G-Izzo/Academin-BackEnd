@@ -18,49 +18,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="student_skill")
 public class Student_Skill {
 	
-	 @Column(name = "student_id")
-	 Long studentId;
-
-	 @Column(name = "skill_id")
-	 Long courseId; 
-
-	public Student_Skill() {}			
-
-	
-	public Student_Skill(Long studentId, Long courseId, Long id, Rating myRating, Student student, Skill skill) {
-		super();
-		this.studentId = studentId;
-		this.courseId = courseId;
-		this.id = id;
-		this.myRating = myRating;
-		this.student = student;
-		this.skill = skill;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Enumerated(EnumType.STRING)	
     private Rating myRating;
-
-	public Rating getMyRating() {
-		return myRating;
-	}
-
-	public void setMyRating(Rating myRating) {
-		this.myRating = myRating;
-	}	
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -71,27 +34,32 @@ public class Student_Skill {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="skill_id", nullable = false)
 	private Skill skill;
-
-	public Long getStudentId() {
-		return studentId;
+	
+	public Student_Skill() {}	
+	public Student_Skill(Long id, Rating myRating, Student student, Skill skill) {
+		this.id = id;
+		this.myRating = myRating;
+		this.student = student;
+		this.skill = skill;
 	}
 
-	public void setStudentId(Long studentId) {
-		this.studentId = studentId;
+	public Rating getMyRating() {
+		return myRating;
 	}
-
-	public Long getCourseId() {
-		return courseId;
+	public void setMyRating(Rating myRating) {
+		this.myRating = myRating;
+	}	
+	
+	public Long getId() {
+		return id;
 	}
-
-	public void setCourseId(Long courseId) {
-		this.courseId = courseId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Student getStudent() {
 		return student;
 	}
-
 	public void setStudent(Student student) {
 		this.student = student;
 	}
@@ -99,11 +67,7 @@ public class Student_Skill {
 	public Skill getSkill() {
 		return skill;
 	}
-
 	public void setSkill(Skill skill) {
 		this.skill = skill;
-	}
-	
-	
-	  
+	}	  
 }

@@ -3,9 +3,12 @@ package it.ibs.registro.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import it.ibs.registro.dao.Student_Exam_Session_Repository;
 import it.ibs.registro.model.Student_Exam_Session;
 
+@Service
 public class Student_Exam_Session_Service {
 
 	@Autowired

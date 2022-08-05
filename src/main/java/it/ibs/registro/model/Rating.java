@@ -3,8 +3,7 @@ package it.ibs.registro.model;
 import java.util.HashMap;
 import java.util.Map;
 
-enum Rating {	
-	
+enum Rating {		
 	
 	ASSENTE("Assente",0),
 	INSUFFICIENTE("Insufficiente", 1),
@@ -30,22 +29,13 @@ enum Rating {
 		this.vote = vote;
 	}
 
+    public static Rating valueOfLabel(String label) {
+        return BY_LABEL.get(label);
+    }
 
-	  public static Rating valueOfLabel(String label) {
-	        return BY_LABEL.get(label);
-	    }
-
-	    public static Rating valueOfVote(int number) {
-	        return BY_VOTE.get(number);
-	    }
-	
-	
-	
-	
-	
-	};
-	
-
-
-	
+    public static Rating valueOfVote(int number) {
+        return BY_VOTE.get(number);
+    }
+		
+};	
 	

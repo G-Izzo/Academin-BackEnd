@@ -3,9 +3,12 @@ package it.ibs.registro.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import it.ibs.registro.dao.Lesson_Student_Repository;
 import it.ibs.registro.model.Lesson_Student;
 
+@Service
 public class Lesson_Student_Service {
 
 	@Autowired

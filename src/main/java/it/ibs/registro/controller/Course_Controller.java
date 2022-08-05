@@ -18,28 +18,27 @@ import it.ibs.registro.service.Course_Service;
 @RequestMapping("/api/v1")
 public class Course_Controller {
 
-		@Autowired
-		private Course_Service course_service;
-		
-		
-		@PostMapping("/addCourse")
-		public void addCourse(@RequestBody Course course) {
-			course_service.addCourse(course);			
-		}
-		
-		@GetMapping("/getAllCourses")
-		public List<Course> getAllCourses() {	
-				return course_service.getAllCourses();
-		}
+	@Autowired
+	private Course_Service course_service;		
+	
+	@PostMapping("/addCourse")
+	public void addCourse(@RequestBody Course course) {
+		course_service.addCourse(course);			
+	}
+	
+	@GetMapping("/getAllCourses")
+	public List<Course> getAllCourses() {	
+			return course_service.getAllCourses();
+	}
 
-		@PutMapping("/updateCourse")
-		public void updateCourse(@RequestBody Course course) {
-			course_service.updateCourse(course);			
-		}	
-			
-		@DeleteMapping("/deleteCourse/{id}")
-			public void deleteCourse(@PathVariable(name="id") long id) {
-				course_service.deleteCourse(id);			
-		}
+	@PutMapping("/updateCourse")
+	public void updateCourse(@RequestBody Course course) {
+		course_service.updateCourse(course);			
+	}	
+		
+	@DeleteMapping("/deleteCourse/{id}")
+		public void deleteCourse(@PathVariable(name="id") long id) {
+			course_service.deleteCourse(id);			
+	}
 		
 }
