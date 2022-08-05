@@ -25,22 +25,25 @@ public class Exam_Session {
 	
 	private String exam_date;	
 
-	@OneToMany(mappedBy = "exam_session_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Student_Exam_Session> student_exam_session;
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="exam_session_id", nullable = false)
+	private Student_Exam_Session student_exam_session;
 			
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="exam_id", nullable = false)
+	@JoinColumn(name="id", nullable = false)
 	private Exam exam;
 			
-	public Exam_Session() {}	
-	public Exam_Session(Long id, String exam_date, List<Student_Exam_Session> student_exam_session, Exam exam) {	
-		this.id = id;
+	public Exam_Session() {}		
+	public Exam_Session(Long id, String exam_date, Student_Exam_Session student_exam_session, Exam exam) {
+			this.id = id;
 		this.exam_date = exam_date;
 		this.student_exam_session = student_exam_session;
 		this.exam = exam;
 	}
-	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -54,18 +57,17 @@ public class Exam_Session {
 	public void setExam_date(String exam_date) {
 		this.exam_date = exam_date;
 	}
-		
-	public List<Student_Exam_Session> getStudent_exam_session() {
-		return student_exam_session;
-	}
-	public void setStudent_exam_session(List<Student_Exam_Session> student_exam_session) {
-		this.student_exam_session = student_exam_session;
-	}
-
 	public Exam getExam() {
 		return exam;
 	}
 	public void setExam(Exam exam) {
 		this.exam = exam;
+	}
+	public Student_Exam_Session getStudent_exam_session() {
+		return student_exam_session;
+	}
+	public void setStudent_exam_session(Student_Exam_Session student_exam_session) {
+		this.student_exam_session = student_exam_session;
 	}	
+	
 }
