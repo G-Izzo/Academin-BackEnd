@@ -2,6 +2,7 @@ package it.ibs.registro.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,15 +29,14 @@ public class Lesson {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "course_id", nullable = false)
 	@JsonIgnore
-	private Course course;
+	private Course course;	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "lesson_id", nullable = false)
-	@JsonIgnore
-	private Lesson_Student lesson_student;
+	@OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Lesson_Student> lesson_student;
 			   
-	public Lesson() {}			
-	public Lesson(Long id, String date, String topics, Course course, Lesson_Student lesson_student) {
+	public Lesson() {}		
+
+	public Lesson(Long id, String date, String topics, Course course, List<Lesson_Student> lesson_student) {
 		this.id = id;
 		this.date = date;
 		this.topics = topics;
@@ -69,10 +70,16 @@ public class Lesson {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	public Lesson_Student getLesson_student() {
+
+
+	public List<Lesson_Student> getLesson_student() {
 		return lesson_student;
 	}
-	public void setLesson_student(Lesson_Student lesson_student) {
+
+
+	public void setLesson_student(List<Lesson_Student> lesson_student) {
 		this.lesson_student = lesson_student;
-	} 		   
+	}
+	
+	
 }

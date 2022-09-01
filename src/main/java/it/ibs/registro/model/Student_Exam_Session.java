@@ -8,8 +8,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="student_exam_session")
@@ -22,21 +26,26 @@ public class Student_Exam_Session {
 	private String exam_files_url;
 	private int grade;	
 	
-	@OneToMany(mappedBy = "student_exam_session", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Student> students;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "student_id", nullable = false)
+	@JsonIgnore
+	private Student student;
 	
-	@OneToMany(mappedBy = "student_exam_session", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Exam_Session> exam_sessions;
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="exam_session_id", nullable = false)
+	private Exam_Session exam_session;
 	
 	public Student_Exam_Session() {}
-	public Student_Exam_Session(Long id, String exam_files_url, int grade, List<Student> students,
-			List<Exam_Session> exam_sessions) {
+
+	public Student_Exam_Session(Long id, String exam_files_url, int grade, Student student, Exam_Session exam_session) {		
 		this.id = id;
 		this.exam_files_url = exam_files_url;
 		this.grade = grade;
-		this.students = students;
-		this.exam_sessions = exam_sessions;
+		this.student = student;
+		this.exam_session = exam_session;
 	}
+
 
 
 	public Long getId() {
@@ -59,16 +68,21 @@ public class Student_Exam_Session {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	public List<Student> getStudents() {
-		return students;
+
+	public Student getStudent() {
+		return student;
 	}
-	public void setStudents(List<Student> students) {
-		this.students = students;
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
-	public List<Exam_Session> getExam_sessions() {
-		return exam_sessions;
+
+	public Exam_Session getExam_session() {
+		return exam_session;
 	}
-	public void setExam_sessions(List<Exam_Session> exam_sessions) {
-		this.exam_sessions = exam_sessions;
-	}	
+
+	public void setExam_session(Exam_Session exam_session) {
+		this.exam_session = exam_session;
+	}
+
 }

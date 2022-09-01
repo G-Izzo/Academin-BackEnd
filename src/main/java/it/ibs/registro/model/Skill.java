@@ -2,6 +2,7 @@ package it.ibs.registro.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,12 +25,10 @@ public class Skill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String name;
+	private String name;	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "skill_id", nullable = false)
-	@JsonIgnore
-	private Student_Skill student_skill;
+	@OneToMany(mappedBy = "skill", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Student_Skill> student_skill;	
 	
 	@ManyToMany
 	@JoinTable(name = "exam_skill", 
@@ -37,13 +37,13 @@ public class Skill {
 	private List<Exam> exam;
 
 	public Skill() {}	
-	public Skill(Long id, String name, Student_Skill student_skill, List<Exam> exam) {	
+
+	public Skill(Long id, String name, List<Student_Skill> student_skill, List<Exam> exam) {		
 		this.id = id;
 		this.name = name;
 		this.student_skill = student_skill;
 		this.exam = exam;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -59,12 +59,15 @@ public class Skill {
 		this.name = name;
 	}			  	
 
-	public Student_Skill getStudent_skill() {
+	
+	public List<Student_Skill> getStudent_skill() {
 		return student_skill;
 	}
-	public void setStudent_skill(Student_Skill student_skill) {
+
+	public void setStudent_skill(List<Student_Skill> student_skill) {
 		this.student_skill = student_skill;
 	}
+
 	public List<Exam> getExam() {
 		return exam;
 	}

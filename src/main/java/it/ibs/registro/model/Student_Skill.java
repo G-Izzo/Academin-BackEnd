@@ -10,8 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="student_skill")
@@ -24,18 +28,24 @@ public class Student_Skill {
 	@Enumerated(EnumType.STRING)	
     private Rating myRating;
 	
-	@OneToMany(mappedBy = "student_skill", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Student> students;
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="student_id", nullable = false)
+	private Student student;
 	
-	@OneToMany(mappedBy = "student_skill", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Skill> skills;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "skill_id", nullable = false)
+	@JsonIgnore
+	private Skill skill;
 	
-	public Student_Skill() {}	
-	public Student_Skill(Long id, Rating myRating, List<Student> students, List<Skill> skills) {
+	public Student_Skill() {}		
+
+	public Student_Skill(Long id, Rating myRating, Student student, Skill skill) {
+		super();
 		this.id = id;
 		this.myRating = myRating;
-		this.students = students;
-		this.skills = skills;
+		this.student = student;
+		this.skill = skill;
 	}
 
 	public Rating getMyRating() {
@@ -51,16 +61,22 @@ public class Student_Skill {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<Student> getStudents() {
-		return students;
+	
+	public Student getStudent() {
+		return student;
 	}
-	public void setStudents(List<Student> students) {
-		this.students = students;
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
-	public List<Skill> getSkills() {
-		return skills;
+
+	public Skill getSkill() {
+		return skill;
 	}
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
 	}
+
+
 }

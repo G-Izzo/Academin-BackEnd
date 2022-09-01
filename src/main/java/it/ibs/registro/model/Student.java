@@ -1,5 +1,8 @@
 package it.ibs.registro.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,20 +32,14 @@ public class Student {
 	private String project_allocation_date;
 	private String project_allocation_notes;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "lesson_student_id", nullable = false)
-	@JsonIgnore
-	private Lesson_Student lesson_student;
+	@OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Lesson_Student> lesson_student;	
 	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="student_skill_id", nullable = false)
-	private Student_Skill student_skill;
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Student_Skill> student_skill;	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "student_exam_session_id", nullable = false)
-	@JsonIgnore
-	private Student_Exam_Session student_exam_session;
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Student_Exam_Session> student_exam_session;
 	
 	public Student() {}	
 	public Student(Long id, String name, String surname, String cv_url, String qualifications) {
@@ -50,11 +48,12 @@ public class Student {
 		this.surname = surname;
 		this.cv_url = cv_url;
 		this.qualifications = qualifications;
-	}
+	}		
+
 	public Student(Long id, String name, String surname, String cv_url, String qualifications,
 			String training_starting_date, String training_ending_date, String project_allocation_date,
-			String project_allocation_notes, Lesson_Student lesson_student, Student_Skill student_skill,
-			Student_Exam_Session student_exam_session) {
+			String project_allocation_notes, List<Lesson_Student> lesson_student, List<Student_Skill> student_skill,
+			List<Student_Exam_Session> student_exam_session) {	
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -129,25 +128,27 @@ public class Student {
 	public void setQualifications(String qualifications) {
 		this.qualifications = qualifications;
 	}
-	
-	public Student_Exam_Session getStudent_exam_session() {
+
+	public List<Student_Exam_Session> getStudent_exam_session() {
 		return student_exam_session;
 	}
-	public void setStudent_exam_session(Student_Exam_Session student_exam_session) {
+	public void setStudent_exam_session(List<Student_Exam_Session> student_exam_session) {
 		this.student_exam_session = student_exam_session;
 	}
-	public Student_Skill getStudent_skill() {
+	
+	public List<Student_Skill> getStudent_skill() {
 		return student_skill;
 	}
-	public void setStudent_skill(Student_Skill student_skill) {
+	public void setStudent_skill(List<Student_Skill> student_skill) {
 		this.student_skill = student_skill;
 	}
-	public Lesson_Student getLesson_student() {
+	public List<Lesson_Student> getLesson_student() {
 		return lesson_student;
 	}
-	public void setLesson_student(Lesson_Student lesson_student) {
+	public void setLesson_student(List<Lesson_Student> lesson_student) {
 		this.lesson_student = lesson_student;
 	}
+
 	
 		  	
 }
