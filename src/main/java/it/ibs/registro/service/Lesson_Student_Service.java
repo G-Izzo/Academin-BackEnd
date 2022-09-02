@@ -15,23 +15,24 @@ public class Lesson_Student_Service {
 	private Lesson_Student_Repository lesson_student_repository;
 
 	public void addLessonStudent(Lesson_Student lesson_student) {
-		// TODO Auto-generated method stub
-		
+	lesson_student_repository.save(lesson_student);		
 	}
 
 	public List<Lesson_Student> getAllLessonsStudents() {
-		// TODO Auto-generated method stub
-		return null;
+		return lesson_student_repository.findAll();
 	}
 
 	public void updateLessonStudent(Lesson_Student lesson_student) {
-		// TODO Auto-generated method stub
-		
+		Lesson_Student ls = lesson_student_repository.getById(lesson_student.getId());
+		ls.setDaily_grade(lesson_student.getDaily_grade());
+		ls.setExit_time(lesson_student.getExit_time());
+		ls.setJoin_time(lesson_student.getJoin_time());
+		ls.setLesson(lesson_student.getLesson());
+		lesson_student_repository.save(ls);
 	}
 
 	public void deleteLessonStudent(long id) {
-		// TODO Auto-generated method stub
-		
+		lesson_student_repository.deleteById(id);
 	}
 	
 }

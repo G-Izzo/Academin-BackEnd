@@ -15,23 +15,23 @@ public class Student_Skill_Service {
 	private Student_Skill_Repository student_skill_repository;
 
 	public void addStudentSkill(Student_Skill student_skill) {
-		// TODO Auto-generated method stub
-		
+		student_skill_repository.save(student_skill);
 	}
 
 	public List<Student_Skill> getAllStudentsSkills() {
-		// TODO Auto-generated method stub
-		return null;
+		return student_skill_repository.findAll();
 	}
 
 	public void updateStudentSkill(Student_Skill student_skill) {
-		// TODO Auto-generated method stub
-		
+		Student_Skill ss = student_skill_repository.getById(student_skill.getId());
+		ss.setMyRating(student_skill.getMyRating());
+		ss.setSkill(student_skill.getSkill());
+		ss.setStudent(student_skill.getStudent());
+		student_skill_repository.save(ss);
 	}
 
 	public void deleteStudentSkill(long id) {
-		// TODO Auto-generated method stub
-		
+	student_skill_repository.deleteById(id);		
 	}
 	
 }

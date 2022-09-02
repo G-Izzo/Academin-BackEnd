@@ -15,23 +15,22 @@ public class Company_Service {
 	private Company_Repository company_repository;
 	
 	public void addCompany(Company company) {
-		// TODO Auto-generated method stub
-		
+		company_repository.save(company);		
 	}
 	
-	public List<Company> getAllCompanies() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Company> getAllCompanies() {		
+		return company_repository.findAll();
 	}
 	
 	public void updateCompany(Company company) {
-		// TODO Auto-generated method stub
-		
+		Company c = company_repository.getById(company.getId());
+		c.setCourses(company.getCourses());
+		c.setName(company.getName());
+		company_repository.save(c);
 	}
 	
 	public void deleteCompany(long id) {
-		// TODO Auto-generated method stub
-		
+		company_repository.deleteById(id);
 	}
 
 }

@@ -15,23 +15,33 @@ public class Student_Service {
 	private Student_Repository student_repository;
 
 	public void addStudent(Student student) {
-		// TODO Auto-generated method stub
+	student_repository.save(student);
 		
 	}
 
 	public List<Student> getAllStudents() {
-		// TODO Auto-generated method stub
-		return null;
+		return student_repository.findAll();
 	}
 
 	public void updateStudent(Student student) {
-		// TODO Auto-generated method stub
+		Student s = student_repository.getById(student.getId());
+		s.setCv_url(student.getCv_url());
+		s.setLesson_student(student.getLesson_student());
+		s.setName(student.getName());
+		s.setProject_allocation_date(student.getProject_allocation_date());
+		s.setProject_allocation_notes(student.getProject_allocation_notes());
+		s.setQualifications(student.getQualifications());
+		s.setStudent_exam_session(student.getStudent_exam_session());
+		s.setStudent_skill(student.getStudent_skill());
+		s.setSurname(student.getSurname());
+		s.setTraining_ending_date(student.getTraining_ending_date());
+		s.setTraining_starting_date(student.getTraining_starting_date());
+		student_repository.save(s);	
 		
 	}
 
 	public void deleteStudent(long id) {
-		// TODO Auto-generated method stub
-		
+		student_repository.deleteById(id);		
 	}
 	
 }

@@ -15,23 +15,25 @@ public class Course_Service {
 	private Course_Repository course_repository;
 
 	public void addCourse(Course course) {
-		// TODO Auto-generated method stub
-		
+		course_repository.save(course);		
 	}
 
 	public List<Course> getAllCourses() {
-		// TODO Auto-generated method stub
-		return null;
+		return course_repository.findAll();
 	}
 
 	public void updateCourse(Course course) {
-		// TODO Auto-generated method stub
-		
+		Course c = course_repository.getById(course.getId());
+		c.setCompany(course.getCompany());
+		c.setEnding_date(course.getEnding_date());
+		c.setLessons(course.getLessons());
+		c.setName(course.getName());
+		c.setStarting_date(course.getStarting_date());
+		course_repository.save(c);
 	}
 
 	public void deleteCourse(long id) {
-		// TODO Auto-generated method stub
-		
+		course_repository.deleteById(id);
 	}
 	
 }

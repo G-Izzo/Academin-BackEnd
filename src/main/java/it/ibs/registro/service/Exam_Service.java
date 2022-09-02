@@ -15,24 +15,25 @@ public class Exam_Service {
 	@Autowired
 	private Exam_Repository exam_repository;
 
-	public List<Exam> getAllExams() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Exam> getAllExams() {		
+		return exam_repository.findAll();
 	}
 
 	public void addCourse(Exam exam) {
-		// TODO Auto-generated method stub
-		
+		exam_repository.save(exam);
 	}
 
 	public void updateExam(Exam exam) {
-		// TODO Auto-generated method stub
-		
+		Exam e = exam_repository.getById(exam.getId());
+		e.setExam_session(exam.getExam_session());
+		e.setName(exam.getName());
+		e.setSkill(exam.getSkill());
+		e.setUrl(exam.getUrl());
+		exam_repository.save(e);
 	}
 
 	public void deleteExam(long id) {
-		// TODO Auto-generated method stub
-		
+		exam_repository.deleteById(id);
 	}
 	
 }

@@ -15,23 +15,25 @@ public class Exam_Session_Service {
 	private Exam_Session_Repository exam_session_repository;
 
 	public void addExamSession(Exam_Session exam_session) {
-		// TODO Auto-generated method stub
+	exam_session_repository.save(exam_session);
 		
 	}
 
 	public List<Exam_Session> getAllExamSessions() {
-		// TODO Auto-generated method stub
-		return null;
+		return 	exam_session_repository.findAll();
 	}
 
 	public void updateExamSession(Exam_Session exam_session) {
-		// TODO Auto-generated method stub
+	Exam_Session es = exam_session_repository.getById(exam_session.getId());
+	es.setExam_date(exam_session.getExam_date());
+	es.setExams(exam_session.getExams());
+	es.setStudent_exam_session(exam_session.getStudent_exam_session());
+	exam_session_repository.save(es);
 		
 	}
 
 	public void deleteExamSession(long id) {
-		// TODO Auto-generated method stub
-		
+		exam_session_repository.deleteById(id);
 	}
 	
 }
