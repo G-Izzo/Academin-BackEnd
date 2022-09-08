@@ -35,5 +35,9 @@ public class Exam_Session_Service {
 	public void deleteExamSession(long id) {
 		exam_session_repository.deleteById(id);
 	}
+
+	public Exam_Session getExamSessionbyId(long id) {		
+		return exam_session_repository.getReferenceById(id);
+	}
 	
 }

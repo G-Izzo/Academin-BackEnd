@@ -33,4 +33,8 @@ public class Company_Service {
 		company_repository.deleteById(id);
 	}
 
+	public Company getCompanybyId(long id) {		
+		return company_repository.getReferenceById(id);
+	}
+
 }

@@ -25,7 +25,7 @@ public class Lesson_Student {
 	
 	private String join_time;
 	private String exit_time;
-	private String daily_grade;
+	private int daily_grade;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "lesson_id", nullable = false)
@@ -37,7 +37,9 @@ public class Lesson_Student {
 	@JsonIgnore
 	private Student student;	
 	
-	public Lesson_Student(Long id, String join_time, String exit_time, String daily_grade, Lesson lesson,
+	public Lesson_Student() {}
+	
+	public Lesson_Student(Long id, String join_time, String exit_time, int daily_grade, Lesson lesson,
 			Student student) {		
 		this.id = id;
 		this.join_time = join_time;
@@ -67,10 +69,10 @@ public class Lesson_Student {
 		this.exit_time = exit_time;
 	}
 
-	public String getDaily_grade() {
+	public int getDaily_grade() {
 		return daily_grade;
 	}
-	public void setDaily_grade(String daily_grade) {
+	public void setDaily_grade(int daily_grade) {
 		this.daily_grade = daily_grade;
 	}
 	public Lesson getLesson() {

@@ -40,4 +40,9 @@ public class Lesson_Controller {
 		public void deleteLesson(@PathVariable(name="id") long id) {
 		 lesson_service.deleteLesson(id);			
 	}
+	
+	@GetMapping("/getLessonbyId")
+	public Lesson getLessonbyId(long id) {	
+			return lesson_service.getLessonbyId(id);
+	}
 }

@@ -34,5 +34,9 @@ public class Skill_Service {
 	public void deleteSkill(long id) {
 		skill_repository.deleteById(id);		
 	}
+
+	public Skill getSkillbyId(long id) {
+		return skill_repository.getReferenceById(id);
+	}
 	
 }

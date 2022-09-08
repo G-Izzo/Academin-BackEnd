@@ -43,5 +43,9 @@ public class Student_Service {
 	public void deleteStudent(long id) {
 		student_repository.deleteById(id);		
 	}
+
+	public Student getStudentbyId(long id) {
+	return student_repository.getReferenceById(id);
+	}
 	
 }

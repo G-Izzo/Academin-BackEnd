@@ -35,5 +35,9 @@ public class Exam_Service {
 	public void deleteExam(long id) {
 		exam_repository.deleteById(id);
 	}
+
+	public Exam getExambyId(long id) {	
+		return exam_repository.getReferenceById(id);
+	}
 	
 }

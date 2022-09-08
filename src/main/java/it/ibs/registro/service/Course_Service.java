@@ -35,5 +35,9 @@ public class Course_Service {
 	public void deleteCourse(long id) {
 		course_repository.deleteById(id);
 	}
+
+	public Course getCoursebyId(long id) {		
+		return course_repository.getReferenceById(id);
+	}
 	
 }

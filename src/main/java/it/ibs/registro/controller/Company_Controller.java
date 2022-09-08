@@ -41,6 +41,11 @@ public class Company_Controller {
 		public void deleteCompany(@PathVariable(name="id") long id) {
 			company_service.deleteCompany(id);			
 	}
+	
+	@GetMapping("/getCompanybyId")
+	public Company getCompanybyId(long id) {	
+			return company_service.getCompanybyId(id);
+	}
 		
 	
 }

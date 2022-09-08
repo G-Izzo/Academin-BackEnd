@@ -41,4 +41,9 @@ public class Exam_Controller {
 			exam_service.deleteExam(id);			
 	}
 
+	@GetMapping("/getExambyId")
+	public Exam getExambyId(long id) {	
+	 return exam_service.getExambyId(id);
+	}
+	
 }

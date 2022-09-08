@@ -41,4 +41,9 @@ public class Exam_Session_Controller {
 			exam_session_service.deleteExamSession(id);			
 	}
 	
+	@GetMapping("/getExamSessionbyId")
+	public Exam_Session getExamSessionbyId(long id) {	
+			return exam_session_service.getExamSessionbyId(id);
+	}
+	
 }
