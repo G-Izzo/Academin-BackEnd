@@ -59,7 +59,7 @@ public class RegistroApplication {
        	  	 listCompany.add(c);
        	 }         
          company_repository.saveAll(listCompany);
-         
+         //assolotto
          // create courses
          ArrayList<Course> listCourse = new ArrayList<Course>();        
          for(int i = 1; i == 5; i++)
