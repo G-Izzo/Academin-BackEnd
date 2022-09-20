@@ -3,7 +3,7 @@ package it.ibs.registro.model;
 import java.util.HashMap;
 import java.util.Map;
 
-enum Rating {		
+public enum Rating {		
 	
 	ASSENTE("Assente",0),
 	INSUFFICIENTE("Insufficiente", 1),
