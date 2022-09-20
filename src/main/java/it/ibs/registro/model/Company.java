@@ -25,6 +25,7 @@ public class Company {
     private List<Course> courses;
 	
     public Company() {}
+    
 	public Company(Long id, String name, List<Course> courses) {	
 		this.id = id;
 		this.name = name;

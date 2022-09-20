@@ -40,4 +40,9 @@ public class Student_Controller {
 		public void deleteStudent(@PathVariable(name="id") long id) {
 			student_service.deleteStudent(id);			
 	}	
+	
+	@GetMapping("/getStudentbyId")
+	public Student getStudentbyId(long id) {	
+			return student_service.getStudentbyId(id);
+	}
 }

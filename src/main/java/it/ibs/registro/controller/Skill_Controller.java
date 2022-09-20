@@ -41,4 +41,9 @@ public class Skill_Controller {
 			skill_service.deleteSkill(id);			
 	}
 	
+	@GetMapping("/getSkillbyId")
+	public Skill getSkillbyId(long id) {	
+			return skill_service.getSkillbyId(id);
+	}
+	
 }
